@@ -1,0 +1,58 @@
+apply plugin: 'com.android.application'
+
+def is_value_my_set = true;
+def is_value_you_set = true;
+
+android {
+	defaultConfig {
+
+		if (project.hasProperty('value_my_set')) {
+            resValue "string", "value_my", value_my_set
+            is_value_my_set = false
+        } else {
+            resValue "string", "value_my", "defalut_value"
+        }
+
+        if (project.hasProperty('value_you_set')) {
+            resValue "string", "value_you", value_you_set
+            is_value_you_set = false
+        } else {
+            resValue "string", "value_you", "defalut_value"
+        }
+
+        if (is_value_my_set || is_value_you_set) {
+            logger.warn("You are not set value_my")
+            logger.warn("You are not set value_you")
+        }
+
+        String oauth = ""
+        if (project.hasProperty('oauth_callback')) {
+            oauth = oauth_callback
+        } else {
+            oauth = "http://dummy.example.com"
+        }
+
+        resValue "string", "oauth", oauth
+        resValue "string", "oauth_scheme", oauth.split("://")[0]
+	}
+
+	packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+    }
+
+	lintOptions {
+        warning 'MissingTranslation'
+        abortOnError true
+        check 'NewApi', 'InlinedApi'
+        fatal 'NewApi', 'InlinedApi'
+        checkReleaseBuilds true
+
+        textReport isTravis
+        textOutput 'stdout'
+
+        htmlReport !isTravis
+        xmlReport !isTravis
+    }
+}
