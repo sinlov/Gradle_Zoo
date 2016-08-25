@@ -1,0 +1,11 @@
+apply plugin: 'me.tatarka.retrolambda'
+
+// IDE使用JAVA8语法解析(支持lambda表达式)
+compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+}
+
+retrolambda {
+    jvmArgs '-noverify'
+}

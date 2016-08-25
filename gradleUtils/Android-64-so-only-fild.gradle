@@ -1,0 +1,15 @@
+// rest of your app's logic
+splits {
+    abi {
+        enable true
+        reset()
+        include 'armeabi', 'armeabi-v7a', 'x86', 'mips'
+        universalApk false
+    }
+}
+repositories {
+//this way we can find the .aar file in libs folder
+    flatDir {
+        dirs 'libs'
+    }
+}

@@ -1,0 +1,11 @@
+configurations {
+  resultArchives
+}
+
+uploadArchives {
+    repositories {
+       flatDir {
+           dirs 'repos'
+       }
+    }
+}

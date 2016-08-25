@@ -1,0 +1,22 @@
+task findbugs(type: FindBugs) {
+    description 'Run findbugs'
+    group 'verification'
+
+    //class dir setting
+    classes = fileTree("$buildDir/intermediates/classes/debug")
+    //source dir setting
+    source = fileTree("$projectDir/main/java")
+    classpath = files()
+    effort = 'max'
+    //exclude files for create find bugs report
+    excludeFilter = file("$projectDir/conf/findbugs/exclude.xml")
+    reports {
+        xml.enabled = true
+        html.enabled = false
+    }
+}
+
+//after check execute file of findbugs.xml
+check.doLast {
+    project.tasks.getByName("findbugs").execute()
+}

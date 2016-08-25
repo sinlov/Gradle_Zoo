@@ -1,0 +1,16 @@
+
+/**
+ * 获得sdk目录
+ */
+def getAndroidSDKDir(){
+	def sdkDir
+	Properties properties = new Properties()
+	File localProps = project.rootProject.file("local.properties")
+	if (localProps.exists()) {
+        properties.load(localProps.newDataInputStream())
+        sdkDir = properties.getProperty("sdk.dir")
+    } else {
+        sdkDir = System.getenv("ANDROID_HOME")
+    }
+    return sdkDir
+}
