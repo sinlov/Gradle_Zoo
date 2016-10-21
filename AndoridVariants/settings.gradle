@@ -1,3 +1,4 @@
 // Sets the output JAR filename
 //rootProject.name = 'AndroidVeriants'
 include 'ResMerge'
+include 'gradleTest'

@@ -1,0 +1,51 @@
+afterEvaluate {
+    for (variant in android.libraryVariants) {
+        def scope = variant.getVariantData().getScope()
+        String mergeTaskName = scope.getMergeResourcesTask().name
+        println("public_XML_saver Task has insert " + mergeTaskName)
+        def publicXMLMergeTask = tasks.getByName(mergeTaskName)
+
+        publicXMLMergeTask.doLast {
+            String resPath = "${projectDir}/build/intermediates/bundles/release/R.txt"
+            MakeResFile(resPath)
+        }
+    }
+}
+
+def MakeResFile(final rPath) {
+    def resFile = new File(rPath)
+    if (!resFile.exists()) {
+        print "res File is not exist please check" + rPath
+        return false
+    }
+    def sbRRes = new StringBuffer()
+    sbRRes.append("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n")
+    sbRRes.append("<resources>\n")
+    resFile.withInputStream() {
+        is ->
+            resFile.eachLine {
+                line ->
+                    def lineRes = line.split("(" + (char) 32 + "|" + (char) 9 + ")+")
+                    def sbLine = new StringBuffer()
+                    if (lineRes.length == 4 && lineRes[3].matches("[0-9a-fA-Fx]{10}")) {
+                        sbLine.append("\t<public type=\"")
+                        sbLine.append(lineRes[1])
+                        sbLine.append("\" name=\"")
+                        sbLine.append(lineRes[2])
+                        sbLine.append("\" id=\"")
+                        sbLine.append(lineRes[3])
+                        sbLine.append("\" />\n")
+                    }
+                    sbRRes.append(sbLine.toString())
+
+            }
+    }
+    sbRRes.append("</resources>")
+//    println sbRRes.toString()
+    File rootBuild = new File("${rootDir}/build/")
+    if (!rootBuild.exists()) {
+        rootBuild.mkdirs()
+    }
+    new File("${rootDir}/build/public.xml").write(sbRRes.toString())
+    return true
+}

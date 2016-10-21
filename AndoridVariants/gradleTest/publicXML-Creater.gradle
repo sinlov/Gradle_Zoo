@@ -1,0 +1,41 @@
+def MakeResFileRead(final path) {
+    print "res R path is: " + path
+    def resFile = new File(path)
+    if (!resFile.exists()) {
+        print "res File is not exist"
+        return
+    }
+    def sbRRes = new StringBuffer()
+    sbRRes.append("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n")
+    sbRRes.append("<resources>\n")
+    resFile.withInputStream() {
+        is -> resFile.eachLine {
+            line ->
+                def lineRes = line.split("(" + (char)32 + "|" + (char)9 + ")+")
+                def sbLine = new StringBuffer()
+                if (lineRes.length == 4 && lineRes[3].matches("[0-9a-fA-Fx]{10}")) {
+                    sbLine.append("\t<public type=\"")
+                    sbLine.append(lineRes[1])
+                    sbLine.append("\" name=\"")
+                    sbLine.append(lineRes[2])
+                    sbLine.append("\" id=\"")
+                    sbLine.append(lineRes[3])
+                    sbLine.append("\" />\n")
+                }
+                sbRRes.append(sbLine.toString())
+
+        }
+    }
+    sbRRes.append("</resources>")
+//    println sbRRes.toString()
+    new File("${rootDir}/build/public.xml").write(sbRRes.toString())
+    return true
+}
+
+task TestResRReader {
+    doLast {
+        println 'start test ResRReader!'
+        def rPath = "${projectDir}/R.txt"
+        MakeResFileRead(rPath)
+    }
+}

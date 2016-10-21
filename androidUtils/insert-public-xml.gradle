@@ -1,0 +1,66 @@
+afterEvaluate {
+    for (variant in android.applicationVariants) {
+        def scope = variant.getVariantData().getScope()
+        String mergeTaskName = scope.getMergeResourcesTask().name
+        println("insertPublicXML task has insert " + mergeTaskName)
+        def publicXMLMergeTask = tasks.getByName(mergeTaskName)
+        publicXMLMergeTask.doLast {
+            def forInsertModule = MODULE_NAME_INSERT_PUBLIC_XML
+            String saveInsertModule = "${rootDir}/" + forInsertModule
+            String resPath = saveInsertModule + "/build/intermediates/bundles/release/R.txt"
+            MakeResFile(resPath)
+            String insertXMLPath = "${rootDir}/build/public.xml"
+            def resFile = new File(insertXMLPath)
+            if (!resFile.exists()) {
+                new IllegalArgumentException("public.xml File is not exist please check at" + insertXMLPath).printStackTrace()
+            }
+            copy {
+                int i = 0
+                from(android.sourceSets.main.res.srcDirs) {
+                    include insertXMLPath
+                    rename 'public.xml', (i++ == 0 ? "public.xml" : "public_${i}.xml")
+                }
+                into(publicXMLMergeTask.outputDir)
+            }
+        }
+    }
+}
+
+
+def MakeResFile(final rPath) {
+    def resFile = new File(rPath)
+    if (!resFile.exists()) {
+        print "res File is not exist please check" + rPath
+        return false
+    }
+    def sbRRes = new StringBuffer()
+    sbRRes.append("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n")
+    sbRRes.append("<resources>\n")
+    resFile.withInputStream() {
+        is ->
+            resFile.eachLine {
+                line ->
+                    def lineRes = line.split("(" + (char) 32 + "|" + (char) 9 + ")+")
+                    def sbLine = new StringBuffer()
+                    if (lineRes.length == 4 && lineRes[3].matches("[0-9a-fA-Fx]{10}")) {
+                        sbLine.append("\t<public type=\"")
+                        sbLine.append(lineRes[1])
+                        sbLine.append("\" name=\"")
+                        sbLine.append(lineRes[2])
+                        sbLine.append("\" id=\"")
+                        sbLine.append(lineRes[3])
+                        sbLine.append("\" />\n")
+                    }
+                    sbRRes.append(sbLine.toString())
+
+            }
+    }
+    sbRRes.append("</resources>")
+//    println sbRRes.toString()
+    File rootBuild = new File("${rootDir}/build/")
+    if (!rootBuild.exists()) {
+        rootBuild.mkdirs()
+    }
+    new File("${rootDir}/build/public.xml").write(sbRRes.toString())
+    return true
+}
