@@ -20,3 +20,7 @@
 # Android Utils 使用指南
 
 [使用请点击](androidUtils/README.md)
+
+# Android local 本地发布插件使用
+
+[插件使用请点击查看](android-local/README.md)

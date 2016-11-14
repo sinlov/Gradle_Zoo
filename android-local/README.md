@@ -59,16 +59,16 @@ dependencies {
 
 ```gradle
 // uploadArchives without javadoc
-apply from: "https://github.com/sinlov/Gradle_Zoo/raw/master/github/android/github-archives-no-javadoc.gradle"
+apply from: "https://github.com/sinlov/Gradle_Zoo/raw/master/android-local/github-archives-no-javadoc.gradle"
 
 // uploadArchives without javadoc and Sources
-apply from: "https://github.com/sinlov/Gradle_Zoo/raw/master/github/android/github-archives-no-doc-sources.gradle"
+apply from: "https://github.com/sinlov/Gradle_Zoo/raw/master/android-local/github-archives-no-doc-sources.gradle"
 
 // uploadArchives all
-apply from: "https://github.com/sinlov/Gradle_Zoo/raw/master/github/android/github-archives-all.gradle"
+apply from: "https://github.com/sinlov/Gradle_Zoo/raw/master/android-local/github-archives-all.gradle"
 
 // uploadArchives aar
-apply from: "https://github.com/sinlov/Gradle_Zoo/raw/master/github/android/github-archives-aar.gradle"
+apply from: "https://github.com/sinlov/Gradle_Zoo/raw/master/android-local/local-archives-aar.gradle"
 
 // uploadArchive only arr
-apply from: "https://github.com/sinlov/Gradle_Zoo/raw/master/github/android/github-archives-only-arr.gradle"
+apply from: "https://github.com/sinlov/Gradle_Zoo/raw/master/android-local/github-archives-only-arr.gradle"

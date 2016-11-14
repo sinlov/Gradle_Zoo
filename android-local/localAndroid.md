@@ -6,10 +6,10 @@
 
 ```gradle
 // uploadArchives all
-apply from: "https://github.com/sinlov/Gradle_Zoo/raw/master/github/android/github-archives-all.gradle"
+apply from: "https://github.com/sinlov/Gradle_Zoo/raw/master/android-local/github-archives-all.gradle"
 ```
 
-https://github.com/sinlov/Gradle_Zoo/raw/master/github/android/github-archives-all.gradle
+https://github.com/sinlov/Gradle_Zoo/raw/master/android-local/github-archives-all.gradle
 这个地址是使用git的源数据的地址，请自行查找后替换掉
 
 
@@ -33,12 +33,12 @@ https://github.com/sinlov/Gradle_Zoo/raw/master/github/android/github-archives-a
 
 ```gradle
 //uploadArchives
-apply from: "github-archives-all.gradle"
+apply from: "local-archives-all.gradle"
 ```
 
 同时将
 
-https://github.com/sinlov/Gradle_Zoo/raw/master/github/android/github-archives-all.gradle
+https://github.com/sinlov/Gradle_Zoo/raw/master/android-local/github-archives-all.gradle
 
 这个文件复制到需要上传moudles根目录
 
@@ -53,15 +53,6 @@ https://github.com/sinlov/Gradle_Zoo/raw/master/github/android/github-archives-a
 |---|---|---|
 |GROUP|发布组ID|写包结构 com.game.package|
 |VERSION_NAME|版本号|一般填写0.0.1，用于区分版本|
-|POM_URL|POM URL|指定到你的github仓库根目录|
-|POM_SCM_URL|POM SCM URL|指定到你的github仓库根目录|
-|POM_SCM_CONNECTION|POM SCM CONNECTION 地址|格式一般为scm:+ git协议路径|
-|POM_SCM_DEV_CONNECTION|POM SCM DEV CONNECTION 地址|格式一般为scm:+ git协议路径|
-|POM_LICENCE_NAME|代码授权协议名称|比如The Apache Software License, Version 2.0|
-|POM_LICENCE_URL|代码授权协议URL|协议链接|
-|POM_LICENCE_DIST|dist路径|一般填写repo|
-|POM_DEVELOPER_ID|作者ID|自定|
-|POM_DEVELOPER_NAME|作者Name|自定|
 |SNAPSHOT_REPOSITORY_URL|快照仓库配置|一般注释不填写|
 |RELEASE_REPOSITORY_URL|发布仓库配置|一般注释不填写|
 |POM_DESCRIPTION|仓库描述|一般不写|
@@ -92,5 +83,5 @@ GROUP=包结构
 
 ```gradle
 // uploadArchives without javadoc
-apply from: "https://github.com/sinlov/Gradle_Zoo/raw/master/github/android/github-archives-no-javadoc.gradle"
+apply from: "https://github.com/sinlov/Gradle_Zoo/raw/master/android-local/github-archives-no-javadoc.gradle"
 ```
