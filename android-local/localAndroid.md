@@ -6,7 +6,7 @@
 
 ```gradle
 // uploadArchives all
-apply from: "https://github.com/sinlov/Gradle_Zoo/raw/master/android-local/github-archives-all.gradle"
+apply from: "https://github.com/sinlov/Gradle_Zoo/raw/master/android-local/local-archives-all.gradle"
 ```
 
 https://github.com/sinlov/Gradle_Zoo/raw/master/android-local/github-archives-all.gradle
@@ -83,5 +83,5 @@ GROUP=包结构
 
 ```gradle
 // uploadArchives without javadoc
-apply from: "https://github.com/sinlov/Gradle_Zoo/raw/master/android-local/github-archives-no-javadoc.gradle"
+apply from: "https://github.com/sinlov/Gradle_Zoo/raw/master/android-local/local-archives-no-javadoc.gradle"
 ```
