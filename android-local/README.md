@@ -72,3 +72,6 @@ apply from: "https://github.com/sinlov/Gradle_Zoo/raw/master/android-local/local
 
 // uploadArchive only arr
 apply from: "https://github.com/sinlov/Gradle_Zoo/raw/master/android-local/local-archives-only-arr.gradle"
+
+// uploadArchive only arr and eclipse
+apply from: "https://github.com/sinlov/Gradle_Zoo/raw/master/android-local/local-archives-only-arr-eclipse.gradle"

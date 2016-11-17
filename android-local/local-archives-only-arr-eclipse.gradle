@@ -1,0 +1,60 @@
+apply plugin: 'maven'
+apply plugin: 'signing'
+
+def isReleaseBuild() {
+    return VERSION_NAME.contains("SNAPSHOT") == false
+}
+
+def gitHubReleaseRepositoryDir() {
+    return hasProperty('GITHUB_RELEASE_REPOSITORY_DIR') ? GITHUB_RELEASE_REPOSITORY_DIR : "file://${project.rootDir}/mvn-repo"
+}
+
+def gitHubSnapshotRepositoryDir() {
+    return hasProperty('GITHUB_SNAPSHOT_REPOSITORY_DIR') ? GITHUB_SNAPSHOT_REPOSITORY_DIR : "file://${project.rootDir}/mvn-repo/snapshots/"
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+                pom.groupId = GROUP
+                pom.artifactId = POM_ARTIFACT_ID
+                pom.version = VERSION_NAME
+
+                repository(url: gitHubReleaseRepositoryDir()) {
+                }
+                snapshotRepository(url: gitHubSnapshotRepositoryDir()) {
+                }
+            }
+        }
+    }
+
+    signing {
+        required { isReleaseBuild() && gradle.taskGraph.hasTask("uploadArchives") }
+        sign configurations.archives
+    }
+
+    task androidrReleaseEclipse(type: Copy) {
+        from( 'build/intermediates/bundles/release/')
+        exclude 'build/intermediates/bundles/release/aapt'
+        into( 'build/eclipse/')
+        include('classes.jar')
+        include('res/')
+        include('jni/')
+        include('libs/')
+        include('aidl/')
+        include('assets/')
+        include('R.txt')
+        rename('classes.jar', "${project.name}-release.jar")
+    }
+
+    task androidReleaseEclipseZip(type: Zip, dependsOn: androidrReleaseEclipse) {
+        classifier = 'eclipse'
+        from "${project.buildDir}/eclipse/"
+    }
+    artifacts {
+        archives androidReleaseEclipseZip
+    }
+}
