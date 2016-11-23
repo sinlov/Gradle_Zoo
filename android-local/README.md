@@ -1,5 +1,27 @@
 [TOC]
 
+# 发布工具使用指南
+
+需要发布的`module`的`build.gradle`中配置
+
+```gralde
+// OutBuildApk
+apply from: "https://github.com/sinlov/Gradle_Zoo/raw/master/android-local/OutBuildApk.gradle"
+```
+
+发布使用命令
+
+```sh
+# out test
+./gradle :modlue:outTAD
+# out release - unsigned
+./gradle :modlue:outTAR
+# out test armv7a
+./gradle :modlue:outTADARMv7a
+# out release - unsigned
+./gradle :modlue:outTARARMv7a
+```
+
 # android 本地仓库发布使用指南
 
 ## gradle 使用本地仓库
