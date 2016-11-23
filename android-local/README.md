@@ -4,6 +4,15 @@
 
 需要发布的`module`的`build.gradle`中配置
 
+在 `gradle.properties` 中配置参数
+
+|key|value|defautl|
+|---|-----|-------|
+|COMM_NAME|公司组织前缀|Def|
+|OBA_OUT_DIR|输出目录|build/outApk|
+
+>输出工程根目录使用 `file://${project.rootDir}` 自定义目录使用 `file://[YouFullPath]`
+
 ```gralde
 // OutBuildApk
 apply from: "https://github.com/sinlov/Gradle_Zoo/raw/master/android-local/OutBuildApk.gradle"
