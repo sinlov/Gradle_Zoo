@@ -46,6 +46,7 @@ task outTARARMv7a(type: Copy, dependsOn: assembleRelease) {
     exclude "build/outputs/apk/${project.name}-x86-debug-unsigned.apk"
     exclude "build/outputs/apk/${project.name}-armeabi-v7a-debug.apk"
     exclude "build/outputs/apk/${project.name}-armeabi-v7a-debug-unsigned.apk"
+    into(OBA_Output)
     include("${project.name}-armeabi-v7a-release-unsigned.apk")
     rename("${project.name}-armeabi-v7a-release-unsigned.apk", Comm_Name + "-${android.defaultConfig.applicationId}-armeabi-v7a-release_unsigned-${android.defaultConfig.versionName}-" + readTimeStr() + ".apk")
 }
