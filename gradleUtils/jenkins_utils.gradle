@@ -1,0 +1,14 @@
+def jenkinsHost() {
+	return hasProperty('JENKINS_HOST') ? JENKINS_HOST : "http://localhost:8088"
+}
+
+def jobSetBuild() {
+	return hasProperty('JENKINS_JOB_NAME') ? JENKINS_JOB_NAME : "AS_Demo"
+}
+
+task performJenkinsBuild >> {
+	def http = new HTTPBuilder(jenkinsHost() + jobSetBuild() + "/build")
+	http.post("", "", requestContentType : URLENC) { resp ->
+		assert resp.statusLine.statusCode == 201
+	}
+}

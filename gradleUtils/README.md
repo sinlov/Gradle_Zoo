@@ -20,3 +20,27 @@
 ```sh
 ./gradlew moduleName:
 ```
+
+## Jenkins Utils
+
+- for perform JenkinsBuild
+
+add `gradle.properties`
+
+```sh
+JENKINS_HOST=http://localhost:8088
+JENKINS_JOB_NAME=AS_Demo
+```
+
+add `build.gradle`
+
+```gradle
+// :module:performJenkinsBuild
+apply from: "https://github.com/sinlov/Gradle_Zoo/raw/master/gradleUtils/jenkins_utils.gradle"
+```
+
+then run
+
+```sh
+./gradlew :module:performJenkinsBuild
+```
