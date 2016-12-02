@@ -7,7 +7,7 @@ def jobSetBuild() {
 }
 
 task performJenkinsBuild >> {
-	def http = new HTTPBuilder(jenkinsHost() + jobSetBuild() + "/build")
+	def http = new HTTPBuilder(jenkinsHost() + "/job/" + jobSetBuild() + "/build")
 	http.post("", "", requestContentType : URLENC) { resp ->
 		assert resp.statusLine.statusCode == 201
 	}
