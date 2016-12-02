@@ -23,6 +23,8 @@
 
 ## Jenkins Utils
 
+**has bug do not use**
+
 - for perform JenkinsBuild
 
 add `gradle.properties`
