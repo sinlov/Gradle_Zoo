@@ -25,6 +25,10 @@ apply from: "https://github.com/sinlov/Gradle_Zoo/raw/master/android-local/OutBu
 apply from: "https://github.com/sinlov/Gradle_Zoo/raw/master/android-local/OutBuildApk_2.0.gradle"
 ```
 
+输出的Apk 默认在`build/outApk/` 中，默认开头为 `Def`
+
+可以在`gradle_properties` 中配置 `OBA_OUT_DIR` `COMM_NAME` 来改变
+
 发布使用命令
 
 ```sh
