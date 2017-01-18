@@ -18,6 +18,13 @@
 apply from: "https://github.com/sinlov/Gradle_Zoo/raw/master/android-local/OutBuildApk.gradle"
 ```
 
+如果使用 Android Studio 2.0 或者以上，请使用
+
+```gralde
+// OutBuildApk_2.0
+apply from: "https://github.com/sinlov/Gradle_Zoo/raw/master/android-local/OutBuildApk_2.0.gradle"
+```
+
 发布使用命令
 
 ```sh

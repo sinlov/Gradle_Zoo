@@ -1,0 +1,66 @@
+apply plugin: 'com.android.application'
+
+android {
+    lintOptions{
+        checkReleaseBuilds false
+        abortOnError false
+    }
+}
+
+def Comm_Name = readComm_Name()
+def OBA_Output = readOBA_Output()
+
+def readComm_Name() {
+    return hasProperty('COMM_NAME') ? COMM_NAME : "Def"
+}
+
+def readOBA_Output() {
+    return hasProperty('OBA_OUT_DIR') ? OBA_OUT_DIR : "build/outApk"
+}
+
+task outTAD(type: Copy, dependsOn: build) {
+    from('build/outputs/apk/')
+    exclude "build/outputs/apk/${project.name}-debug-unsigned.apk"
+    into(OBA_Output)
+    include("${project.name}-debug.apk")
+    rename("${project.name}-debug.apk", Comm_Name + "-${android.defaultConfig.applicationId}-debug-${android.defaultConfig.versionName}-" + readTimeStr() + ".apk")
+}
+
+task outTAR(type: Copy, dependsOn: build) {
+    from('build/outputs/apk/')
+    exclude "build/outputs/apk/${project.name}-debug.apk"
+    exclude "build/outputs/apk/${project.name}-debug-unsigned.apk"
+    into(OBA_Output)
+    include("${project.name}-release-unsigned.apk")
+    rename("${project.name}-release-unsigned.apk", Comm_Name + "-${android.defaultConfig.applicationId}-release_unsigned-${android.defaultConfig.versionName}-" + readTimeStr() + ".apk")
+}
+
+task outTADARMv7a(type: Copy, dependsOn: build) {
+    from('build/outputs/apk/')
+    exclude "build/outputs/apk/${project.name}-armeabi-v7a-debug-unsigned.apk"
+    into(OBA_Output)
+    include("${project.name}-armeabi-v7a-debug.apk")
+    rename("${project.name}-armeabi-v7a-debug.apk", Comm_Name + "-${android.defaultConfig.applicationId}-armeabi-v7a-debug-${android.defaultConfig.versionName}-" + readTimeStr() + ".apk")
+}
+
+task outTARARMv7a(type: Copy, dependsOn: build) {
+    from('build/outputs/apk/')
+    exclude "build/outputs/apk/${project.name}-debug.apk"
+    exclude "build/outputs/apk/${project.name}-debug-unsigned.apk"
+    exclude "build/outputs/apk/${project.name}-armeabi-debug.apk"
+    exclude "build/outputs/apk/${project.name}-armeabi-debug-unsigned.apk"
+    exclude "build/outputs/apk/${project.name}-mips-debug.apk"
+    exclude "build/outputs/apk/${project.name}-mips-debug-unsigned.apk"
+    exclude "build/outputs/apk/${project.name}-x86-debug.apk"
+    exclude "build/outputs/apk/${project.name}-x86-debug-unsigned.apk"
+    exclude "build/outputs/apk/${project.name}-armeabi-v7a-debug.apk"
+    exclude "build/outputs/apk/${project.name}-armeabi-v7a-debug-unsigned.apk"
+    into(OBA_Output)
+    include("${project.name}-armeabi-v7a-release-unsigned.apk")
+    rename("${project.name}-armeabi-v7a-release-unsigned.apk", Comm_Name + "-${android.defaultConfig.applicationId}-armeabi-v7a-release_unsigned-${android.defaultConfig.versionName}-" + readTimeStr() + ".apk")
+}
+
+
+def readTimeStr() {
+    return new Date().format('yyyy-MM-dd-HH-mm');
+}
