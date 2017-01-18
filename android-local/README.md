@@ -14,14 +14,14 @@
 >输出工程根目录使用 `file://${project.rootDir}` 自定义目录使用 `file://[YouFullPath]`
 
 ```gralde
-// OutBuildApk
+// OutBuildApk you can annotation this if network bad!
 apply from: "https://github.com/sinlov/Gradle_Zoo/raw/master/android-local/OutBuildApk.gradle"
 ```
 
 如果使用 Android Studio 2.0 或者以上，请使用
 
 ```gralde
-// OutBuildApk_2.0
+// OutBuildApk_2.0 you can annotation this if network bad!
 apply from: "https://github.com/sinlov/Gradle_Zoo/raw/master/android-local/OutBuildApk_2.0.gradle"
 ```
 
