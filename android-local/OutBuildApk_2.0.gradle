@@ -60,6 +60,18 @@ task outTARARMv7a(type: Copy, dependsOn: build) {
     rename("${project.name}-armeabi-v7a-release-unsigned.apk", Comm_Name + "-${android.defaultConfig.applicationId}-armeabi-v7a-release_unsigned-${android.defaultConfig.versionName}-" + readTimeStr() + ".apk")
 }
 
+task outProductFlavorsReleaseAll(type: Copy, dependsOn: build) {
+    android.productFlavors.all { flavor ->
+        println "productFlavors ${flavor.name}"
+        from('build/outputs/apk/')
+        exclude "build/outputs/apk/${project.name}-${flavor.name}.apk"
+        exclude "build/outputs/apk/${project.name}-${flavor.name}-unsigned.apk"
+        into(OBA_Output)
+        include("${project.name}-${flavor.name}-release-unsigned.apk")
+        rename("${project.name}-${flavor.name}-release-unsigned.apk", Comm_Name + "-${android.defaultConfig.applicationId}-${flavor.name}-unsigned-${android.defaultConfig.versionName}-" + readTimeStr() + ".apk")
+    }
+}
+
 
 def readTimeStr() {
     return new Date().format('yyyy-MM-dd-HH-mm');

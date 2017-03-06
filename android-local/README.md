@@ -33,13 +33,15 @@ apply from: "https://github.com/sinlov/Gradle_Zoo/raw/master/android-local/OutBu
 
 ```sh
 # out test
-./gradle :modlue:outTAD
+./gradle :module:outTAD
 # out release - unsigned
-./gradle :modlue:outTAR
+./gradle :module:outTAR
+# out ProductFlavorsReleaseAll
+./gradle :module:outProductFlavorsReleaseAll
 # out test armv7a
-./gradle :modlue:outTADARMv7a
+./gradle :module:outTADARMv7a
 # out release - unsigned
-./gradle :modlue:outTARARMv7a
+./gradle :module:outTARARMv7a
 ```
 
 # android 本地仓库发布使用指南
@@ -69,11 +71,11 @@ allprojects {
 或者在需要使用的`module`的`build.gradle`中配置
 
 ```gradle
-    repositories {
-        maven {
-            url 'file:///Users/sinlov/Documents/GitHub/MDL_Sinlov/MDL-Android-Repo/mvn-repo/'
-        }
+repositories {
+    maven {
+        url 'file:///Users/sinlov/Documents/GitHub/MDL_Sinlov/MDL-Android-Repo/mvn-repo/'
     }
+}
 ```
 
 **具体见自己的依赖管理设置**
