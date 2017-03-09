@@ -19,7 +19,10 @@ def readOBA_Output() {
 }
 
 task outTAD(type: Copy, dependsOn: build) {
-    clearnOutDir()
+    def outCatchDir = new File(OBA_Output)
+    if (outCatchDir.exists()) {
+        outCatchDir.deleteDir()
+    }
     from('build/outputs/apk/')
     exclude "build/outputs/apk/${project.name}-debug-unsigned.apk"
     into(OBA_Output)
@@ -28,7 +31,10 @@ task outTAD(type: Copy, dependsOn: build) {
 }
 
 task outTAR(type: Copy, dependsOn: build) {
-    clearnOutDir()
+    def outCatchDir = new File(OBA_Output)
+    if (outCatchDir.exists()) {
+        outCatchDir.deleteDir()
+    }
     from('build/outputs/apk/')
     exclude "build/outputs/apk/${project.name}-debug.apk"
     exclude "build/outputs/apk/${project.name}-debug-unsigned.apk"
@@ -38,7 +44,10 @@ task outTAR(type: Copy, dependsOn: build) {
 }
 
 task outTADARMv7a(type: Copy, dependsOn: build) {
-    clearnOutDir()
+    def outCatchDir = new File(OBA_Output)
+    if (outCatchDir.exists()) {
+        outCatchDir.deleteDir()
+    }
     from('build/outputs/apk/')
     exclude "build/outputs/apk/${project.name}-armeabi-v7a-debug-unsigned.apk"
     into(OBA_Output)
@@ -47,7 +56,10 @@ task outTADARMv7a(type: Copy, dependsOn: build) {
 }
 
 task outTARARMv7a(type: Copy, dependsOn: build) {
-    clearnOutDir()
+    def outCatchDir = new File(OBA_Output)
+    if (outCatchDir.exists()) {
+        outCatchDir.deleteDir()
+    }
     from('build/outputs/apk/')
     exclude "build/outputs/apk/${project.name}-debug.apk"
     exclude "build/outputs/apk/${project.name}-debug-unsigned.apk"
@@ -65,7 +77,10 @@ task outTARARMv7a(type: Copy, dependsOn: build) {
 }
 
 task outProductFlavorsReleaseUnsigned(type: Copy, dependsOn: build) {
-    clearnOutDir()
+    def outCatchDir = new File(OBA_Output)
+    if (outCatchDir.exists()) {
+        outCatchDir.deleteDir()
+    }
     android.productFlavors.all { flavor ->
         println "productFlavors ${flavor.name}"
         from('build/outputs/apk/')
@@ -78,7 +93,10 @@ task outProductFlavorsReleaseUnsigned(type: Copy, dependsOn: build) {
 }
 
 task outProductFlavorsReleaseAll(type: Copy, dependsOn: build) {
-    clearnOutDir()
+    def outCatchDir = new File(OBA_Output)
+    if (outCatchDir.exists()) {
+        outCatchDir.deleteDir()
+    }
     android.productFlavors.all { flavor ->
         println "productFlavors ${flavor.name}"
         from('build/outputs/apk/')
@@ -87,14 +105,6 @@ task outProductFlavorsReleaseAll(type: Copy, dependsOn: build) {
         into(OBA_Output)
         include("${project.name}-${flavor.name}-release.apk")
         rename("${project.name}-${flavor.name}-release.apk", Comm_Name + "-${android.defaultConfig.applicationId}-${flavor.name}-${android.defaultConfig.versionName}-" + readTimeStr() + ".apk")
-    }
-}
-
-
-def clearnOutDir() {
-    def outCatchDir = new File(Comm_Name)
-    if (outCatchDir.exists()) {
-        outCatchDir.deleteDir()
     }
 }
 
