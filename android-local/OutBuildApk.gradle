@@ -52,6 +52,9 @@ task outTARARMv7a(type: Copy, dependsOn: assembleRelease) {
 }
 
 task outProductFlavorsReleaseUnsigned(type: Copy, dependsOn: assembleRelease) {
+    if（new File(OBA_Output).exists()）{
+        new File(OBA_Output).deleteDir()
+    }
     android.productFlavors.all { flavor ->
         println "productFlavors ${flavor.name}"
         from('build/outputs/apk/')
@@ -64,6 +67,9 @@ task outProductFlavorsReleaseUnsigned(type: Copy, dependsOn: assembleRelease) {
 }
 
 task outProductFlavorsReleaseAll(type: Copy, dependsOn: assembleRelease) {
+    if（new File(OBA_Output).exists()）{
+        new File(OBA_Output).deleteDir()
+    }
     android.productFlavors.all { flavor ->
         println "productFlavors ${flavor.name}"
         from('build/outputs/apk/')
