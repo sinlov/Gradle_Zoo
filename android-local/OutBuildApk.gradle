@@ -10,6 +10,7 @@ def readOBA_Output() {
 }
 
 task outTAD(type: Copy, dependsOn: assembleDebug) {
+    clearnOutDir()
     from('build/outputs/apk/')
     exclude "build/outputs/apk/${project.name}-debug-unsigned.apk"
     into(OBA_Output)
@@ -18,6 +19,7 @@ task outTAD(type: Copy, dependsOn: assembleDebug) {
 }
 
 task outTAR(type: Copy, dependsOn: assembleRelease) {
+    clearnOutDir()
     from('build/outputs/apk/')
     exclude "build/outputs/apk/${project.name}-debug.apk"
     exclude "build/outputs/apk/${project.name}-debug-unsigned.apk"
@@ -27,6 +29,7 @@ task outTAR(type: Copy, dependsOn: assembleRelease) {
 }
 
 task outTADARMv7a(type: Copy, dependsOn: assembleDebug) {
+    clearnOutDir()
     from('build/outputs/apk/')
     exclude "build/outputs/apk/${project.name}-armeabi-v7a-debug-unsigned.apk"
     into(OBA_Output)
@@ -35,6 +38,7 @@ task outTADARMv7a(type: Copy, dependsOn: assembleDebug) {
 }
 
 task outTARARMv7a(type: Copy, dependsOn: assembleRelease) {
+    clearnOutDir()
     from('build/outputs/apk/')
     exclude "build/outputs/apk/${project.name}-debug.apk"
     exclude "build/outputs/apk/${project.name}-debug-unsigned.apk"
@@ -52,6 +56,7 @@ task outTARARMv7a(type: Copy, dependsOn: assembleRelease) {
 }
 
 task outProductFlavorsReleaseUnsigned(type: Copy, dependsOn: assembleRelease) {
+    clearnOutDir()
     android.productFlavors.all { flavor ->
         println "productFlavors ${flavor.name}"
         from('build/outputs/apk/')
@@ -64,6 +69,7 @@ task outProductFlavorsReleaseUnsigned(type: Copy, dependsOn: assembleRelease) {
 }
 
 task outProductFlavorsReleaseAll(type: Copy, dependsOn: assembleRelease) {
+    clearnOutDir()
     android.productFlavors.all { flavor ->
         println "productFlavors ${flavor.name}"
         from('build/outputs/apk/')
@@ -75,6 +81,13 @@ task outProductFlavorsReleaseAll(type: Copy, dependsOn: assembleRelease) {
     }
 }
 
+def clearnOutDir() {
+    def outCatchDir = new File(Comm_Name)
+    if (outCatchDir.exists()) {
+        outCatchDir.deleteDir()
+    }
+}
+
 def readTimeStr() {
-    return new Date().format('yyyy-MM-dd-HH-mm');
+    return new Date().format('yyyy_MM_dd_HH_mm');
 }

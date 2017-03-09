@@ -19,6 +19,7 @@ def readOBA_Output() {
 }
 
 task outTAD(type: Copy, dependsOn: build) {
+    clearnOutDir()
     from('build/outputs/apk/')
     exclude "build/outputs/apk/${project.name}-debug-unsigned.apk"
     into(OBA_Output)
@@ -27,6 +28,7 @@ task outTAD(type: Copy, dependsOn: build) {
 }
 
 task outTAR(type: Copy, dependsOn: build) {
+    clearnOutDir()
     from('build/outputs/apk/')
     exclude "build/outputs/apk/${project.name}-debug.apk"
     exclude "build/outputs/apk/${project.name}-debug-unsigned.apk"
@@ -36,6 +38,7 @@ task outTAR(type: Copy, dependsOn: build) {
 }
 
 task outTADARMv7a(type: Copy, dependsOn: build) {
+    clearnOutDir()
     from('build/outputs/apk/')
     exclude "build/outputs/apk/${project.name}-armeabi-v7a-debug-unsigned.apk"
     into(OBA_Output)
@@ -44,6 +47,7 @@ task outTADARMv7a(type: Copy, dependsOn: build) {
 }
 
 task outTARARMv7a(type: Copy, dependsOn: build) {
+    clearnOutDir()
     from('build/outputs/apk/')
     exclude "build/outputs/apk/${project.name}-debug.apk"
     exclude "build/outputs/apk/${project.name}-debug-unsigned.apk"
@@ -61,6 +65,7 @@ task outTARARMv7a(type: Copy, dependsOn: build) {
 }
 
 task outProductFlavorsReleaseUnsigned(type: Copy, dependsOn: build) {
+    clearnOutDir()
     android.productFlavors.all { flavor ->
         println "productFlavors ${flavor.name}"
         from('build/outputs/apk/')
@@ -73,6 +78,7 @@ task outProductFlavorsReleaseUnsigned(type: Copy, dependsOn: build) {
 }
 
 task outProductFlavorsReleaseAll(type: Copy, dependsOn: build) {
+    clearnOutDir()
     android.productFlavors.all { flavor ->
         println "productFlavors ${flavor.name}"
         from('build/outputs/apk/')
@@ -85,6 +91,13 @@ task outProductFlavorsReleaseAll(type: Copy, dependsOn: build) {
 }
 
 
+def clearnOutDir() {
+    def outCatchDir = new File(Comm_Name)
+    if (outCatchDir.exists()) {
+        outCatchDir.deleteDir()
+    }
+}
+
 def readTimeStr() {
-    return new Date().format('yyyy-MM-dd-HH-mm');
+    return new Date().format('yyyy_MM_dd_HH_mm');
 }
