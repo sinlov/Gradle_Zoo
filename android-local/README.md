@@ -31,7 +31,7 @@ apply from: "https://github.com/sinlov/Gradle_Zoo/raw/master/android-local/OutBu
 可以在`gradle_properties` 中配置 `OBA_OUT_DIR` `COMM_NAME` 来改变
 
 ```gralde
-// OutBuildAAR you can annotation this if network bad! use at outAARFlavorsRelease
+// OutBuildAAR you can annotation this if network bad! use at outAARFlavorsRelease or outAARFlavorsReleaseRepo
 apply from: "https://github.com/sinlov/Gradle_Zoo/raw/master/android-local/outAAR.gradle"
 ```
 
