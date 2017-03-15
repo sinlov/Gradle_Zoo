@@ -1,0 +1,23 @@
+android {
+  buildTypes {
+    release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            //assembleRelease 输出apk名称为: 模块名称-渠道名-版本名-时间.apk 输出路径 build/outputs/variantsApk/
+            def outCatchDir = new File("${project.buildDir}/outputs/variantsApk/")
+            if (outCatchDir.exists()) {
+                outCatchDir.deleteDir()
+            }
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                        def fileName = "${project.name}-${variant.productFlavors[0].name}-v${defaultConfig.versionName}-${releaseTime()}.apk"
+                        output.outputFile = new File("${project.buildDir}/outputs/variantsApk/", fileName)
+                    }
+                }
+            }
+        }
+  }
+}

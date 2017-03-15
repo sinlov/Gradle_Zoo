@@ -96,6 +96,8 @@ task outProductFlavorsReleaseAll(type: Copy, dependsOn: assembleRelease) {
         into(OBA_Output)
         include("${project.name}-${flavor.name}-release.apk")
         rename("${project.name}-${flavor.name}-release.apk", Comm_Name + "-${android.defaultConfig.applicationId}-${flavor.name}-${android.defaultConfig.versionName}-" + readTimeStr() + ".apk")
+        include("${project.name}-${flavor.name}-release-unsigned.apk")
+        rename("${project.name}-${flavor.name}-release-unsigned.apk", Comm_Name + "-${android.defaultConfig.applicationId}-${flavor.name}-unsigned-${android.defaultConfig.versionName}-" + readTimeStr() + ".apk")
     }
 }
 
