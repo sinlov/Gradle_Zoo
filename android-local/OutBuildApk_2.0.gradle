@@ -87,7 +87,7 @@ task outProductFlavorsReleaseUnsigned(type: Copy, dependsOn: build) {
         exclude "build/outputs/apk/${project.name}-${flavor.name}.apk"
         into(OBA_Output)
         include("${project.name}-${flavor.name}-release-unaligned.apk")
-        rename("${project.name}-${flavor.name}-release-unaligned.apk", Comm_Name + "-${android.defaultConfig.applicationId}-${flavor.name}-unsigned-${android.defaultConfig.versionName}-" + readTimeStr() + ".apk")
+        rename("${project.name}-${flavor.name}-release-unaligned.apk", Comm_Name + "-${android.defaultConfig.applicationId}-${flavor.name}-unaligned-${android.defaultConfig.versionName}-" + readTimeStr() + ".apk")
     }
 }
 
@@ -104,7 +104,7 @@ task outProductFlavorsReleaseAll(type: Copy, dependsOn: build) {
         include("${project.name}-${flavor.name}-release.apk")
         rename("${project.name}-${flavor.name}-release.apk", Comm_Name + "-${android.defaultConfig.applicationId}-${flavor.name}-${android.defaultConfig.versionName}-" + readTimeStr() + ".apk")
         include("${project.name}-${flavor.name}-release-unaligned.apk")
-        rename("${project.name}-${flavor.name}-release-unaligned.apk", Comm_Name + "-${android.defaultConfig.applicationId}-${flavor.name}-unsigned-${android.defaultConfig.versionName}-" + readTimeStr() + ".apk")
+        rename("${project.name}-${flavor.name}-release-unaligned.apk", Comm_Name + "-${android.defaultConfig.applicationId}-${flavor.name}-unaligned-${android.defaultConfig.versionName}-" + readTimeStr() + ".apk")
     }
 }
 
