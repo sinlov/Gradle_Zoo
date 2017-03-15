@@ -1,0 +1,29 @@
+def Comm_Name = readComm_Name()
+def OAA_Output = readOBA_Output()
+
+def readComm_Name() {
+    return hasProperty('COMM_NAME') ? COMM_NAME : "Def"
+}
+
+def readOBA_Output() {
+    return hasProperty('OAA_OUTPUT') ? OAA_OUTPUT : "build/outAAR"
+}
+
+task outAARFlavorsRelease(type: Copy, dependsOn: assembleRelease) {
+    def outCatchDir = new File(OAA_Output)
+    if (outCatchDir.exists()) {
+        outCatchDir.deleteDir()
+    }
+    android.productFlavors.all { flavor ->
+        println "productFlavors ${flavor.name}"
+        from('build/outputs/aar/')
+        exclude "build/outputs/aar/${project.name}-${flavor.name}.aar"
+        into(OAA_Output)
+        include("${project.name}-${flavor.name}-release.aar")
+        rename("${project.name}-${flavor.name}-release.aar", Comm_Name + "-${project.name}-${flavor.name}-${android.defaultConfig.versionName}-" + readTimeStr() + ".aar")
+    }
+}
+
+def readTimeStr() {
+    return new Date().format('yyyy_MM_dd_HH_mm');
+}

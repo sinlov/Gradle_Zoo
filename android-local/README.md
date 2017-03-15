@@ -18,6 +18,7 @@
 apply from: "https://github.com/sinlov/Gradle_Zoo/raw/master/android-local/OutBuildApk.gradle"
 ```
 
+
 如果使用 Android Studio 2.0 或者以上，请使用
 
 ```gralde
@@ -28,6 +29,11 @@ apply from: "https://github.com/sinlov/Gradle_Zoo/raw/master/android-local/OutBu
 输出的Apk 默认在`build/outApk/` 中，默认开头为 `Def`
 
 可以在`gradle_properties` 中配置 `OBA_OUT_DIR` `COMM_NAME` 来改变
+
+```gralde
+// OutBuildAAR you can annotation this if network bad! use at outAARFlavorsRelease
+apply from: "https://github.com/sinlov/Gradle_Zoo/raw/master/android-local/outAAR.gradle"
+```
 
 发布使用命令
 
