@@ -38,16 +38,22 @@ apply from: "https://github.com/sinlov/Gradle_Zoo/raw/master/android-local/outAA
 发布使用命令
 
 ```sh
-# out test
+# out test at {module}/build/outApk
 ./gradle :module:outTAD
-# out release - unsigned
+# out release - unsigned at {module}/build/outApk
 ./gradle :module:outTAR
-# out ProductFlavorsReleaseAll
+# out ProductFlavorsReleaseAll at {module}/build/outApk
 ./gradle :module:outProductFlavorsReleaseAll
-# out test armv7a
+# out test armv7a at {module}/build/outApk
 ./gradle :module:outTADARMv7a
-# out release - unsigned
+# out release - unsigned at {module}/build/outApk
 ./gradle :module:outTARARMv7a
+# out release all at {module}/build/outApk
+./gradle :module:outProductFlavorsReleaseAll
+# out aar FlavorsRelease at {module}/build/outAAR
+./gradle :module:outAARFlavorsRelease
+# out aar FlavorsRelease at repo ${rootDir}/aar-repo/outAAR
+./gradle :module:outAARFlavorsReleaseRepo
 ```
 
 # android 本地仓库发布使用指南

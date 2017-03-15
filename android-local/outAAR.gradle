@@ -11,7 +11,7 @@ def readOAA_Output() {
 }
 
 def readOAA_repo_Output() {
-    return hasProperty('OAA_REPO_OUTPUT') ? OAA_REPO_OUTPUT : "${rootDir}repo/outAAR/${project.name}/${android.defaultConfig.versionName}"
+    return hasProperty('OAA_REPO_OUTPUT') ? OAA_REPO_OUTPUT : "${rootDir}/aar-repo/outAAR/${project.name}/${android.defaultConfig.versionName}"
 }
 
 task outAARFlavorsRelease(type: Copy, dependsOn: assembleRelease) {
@@ -33,6 +33,7 @@ task outAARFlavorsReleaseRepo(type: Copy, dependsOn: assembleRelease) {
     def OAA_REPO_OUTPUT = "${rootDir}repo/outAAR/${project.name}/${android.defaultConfig.versionName}"
     android.productFlavors.all { flavor ->
         println "productFlavors ${flavor.name}"
+        println OAA_REPO_Output
         from('build/outputs/aar/')
         exclude "build/outputs/aar/${project.name}-${flavor.name}.aar"
         into(OAA_REPO_Output)
