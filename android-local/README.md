@@ -19,12 +19,30 @@ apply from: "https://github.com/sinlov/Gradle_Zoo/raw/master/android-local/OutBu
 ```
 
 
-如果使用 Android Studio 2.0 或者以上，请使用
+如果使用 Android Studio 2.2.+ 或者以上，请使用
 
 ```gralde
 // OutBuildApk_2.0 you can annotation this if network bad!
 apply from: "https://github.com/sinlov/Gradle_Zoo/raw/master/android-local/OutBuildApk_2.0.gradle"
 ```
+
+>在 OutBuildApk_2.0 中新增 outProductFlavorsReleaseARM32 和 outProductFlavorsReleaseARM 分别只输出 ARM32位的分包，或者 所有 arm 发布，配合splites abi 使用
+
+```gradle
+android {
+    ...
+    splits{
+        abi{
+            enable true
+            reset()
+            include 'armeabi', 'armeabi-v7a'
+            universalApk false
+        }
+    }
+    ...
+}
+```
+
 
 输出的Apk 默认在`build/outApk/` 中，默认开头为 `Def`
 
