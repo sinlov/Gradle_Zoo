@@ -43,6 +43,11 @@ http://yourgit/name/Gradle_zoo/raw/master/nexus/nexus-publish.gradle
 
 # gradle.properties 配置详解
 
+工程根目录 gradle.properties 配置样例 [nexus-publish.propertese](nexus-publish.propertese)
+根目录用于设置nexus的基础
+
+对于需要推送的模块，配置见 [module_gradle.properties](module_gradle.properties)
+
 ## 发布配置
 
 |字段|用途|备注|
@@ -55,9 +60,31 @@ http://yourgit/name/Gradle_zoo/raw/master/nexus/nexus-publish.gradle
 |SNAPSHOT_REPOSITORY_URL|快照仓库配置|一般注释不填写|
 |RELEASE_REPOSITORY_URL|发布仓库配置|一般注释不填写
 
+> if VERSION_NAME contans SNAPSHOT this project will archive to snapshots which archive to releases not chants
+
+### 这些设置连动到工程可以这么使用
+
+```gradle
+android {
+    compileSdkVersion ANDROID_COMPILE_SDK_VERSION as int
+    buildToolsVersion ANDROID_BUILD_TOOLS_VERSION
+
+    defaultConfig {
+        minSdkVersion ANDROID_MIN_SDK_VERSION as int
+        targetSdkVersion ANDORID_TARGET_SDK_VERSION as int
+        versionCode VERSION_CODE as int
+        versionName VERSION_NAME
+    }
+}
+```
+
+这样就只需要修改一个地方进行发版
+
 ### 快照发布
 
-GROUP=SNAPSHOT
+VERSION_NAME=1.1.1-SNAPSHOT
+
+只要版本号包含SNAPSHOT 就是快照版本
 
 ### 正式发布
 
@@ -67,7 +94,7 @@ GROUP=包结构
 
 ## 如果出现无法编译 javadoc
 
-一般出现在windows编译环境
+一般出现在windows编译环境，或者没法让java-doc正常过编导致
 
 请使用下面的地址，使用无javadoc编译推送
 

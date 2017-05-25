@@ -62,9 +62,12 @@ https://github.com/sinlov/Gradle_Zoo/raw/master/github/android/github-archives-a
 |POM_LICENCE_DIST|dist路径|一般填写repo|
 |POM_DEVELOPER_ID|作者ID|自定|
 |POM_DEVELOPER_NAME|作者Name|自定|
-|SNAPSHOT_REPOSITORY_URL|快照仓库配置|一般注释不填写|
-|RELEASE_REPOSITORY_URL|发布仓库配置|一般注释不填写|
+|GITHUB_SNAPSHOT_REPOSITORY_DIR|快照仓库配置|一般注释不填写|
+|GITHUB_RELEASE_REPOSITORY_DIR|发布仓库配置|一般注释不填写|
 |POM_DESCRIPTION|仓库描述|一般不写|
+
+- GITHUB_RELEASE_REPOSITORY_DIR 发布仓库配置可以是 `file://[绝对路径]`
+- GITHUB_SNAPSHOT_REPOSITORY_DIR 快照仓库配置格式可以是 `file://[绝对路径]`
 
 *module配置*
 

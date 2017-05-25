@@ -156,6 +156,27 @@ task outProductFlavorsReleaseARM32(type: Copy, dependsOn: "assembleRelease") {
     }
 }
 
+task outProductFlavorsReleaseARMv7(type: Copy, dependsOn: "assembleRelease") {
+    def outCatchDir = new File(OBA_Output)
+    if (outCatchDir.exists()) {
+        outCatchDir.deleteDir()
+    }
+    android.productFlavors.all { flavor ->
+        println "productFlavors ${flavor.name}"
+        from('build/outputs/apk/')
+        exclude "build/outputs/apk/${project.name}-${flavor.name}-armeabi-release.apk"
+        // exclude "build/outputs/apk/${project.name}-${flavor.name}-armeabi-v7a-release.apk"
+        exclude "build/outputs/apk/${project.name}-${flavor.name}-arm64-v8a-release.apk"
+        exclude "build/outputs/apk/${project.name}-${flavor.name}-x86-release.apk"
+        exclude "build/outputs/apk/${project.name}-${flavor.name}-x86_64-release.apk"
+        exclude "build/outputs/apk/${project.name}-${flavor.name}-mips-release.apk"
+        exclude "build/outputs/apk/${project.name}-${flavor.name}-mips64-release.apk"
+        into(OBA_Output)
+        include("${project.name}-${flavor.name}-armeabi-v7a-release.apk")
+        rename("${project.name}-${flavor.name}-armeabi-v7a-release.apk", Comm_Name + "-${flavor.applicationId}-${flavor.name}-armeabi-v7a-${android.defaultConfig.versionName}-" + readTimeStr() + ".apk")
+    }
+}
+
 def readTimeStr() {
     return new Date().format('yyyy_MM_dd_HH_mm');
 }
