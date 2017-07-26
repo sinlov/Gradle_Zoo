@@ -9,7 +9,7 @@ def readOBA_Output() {
     return hasProperty('OBA_OUT_DIR') ? OBA_OUT_DIR : "build/outApk"
 }
 
-task outTAD(type: Copy, dependsOn: assembleDebug) {
+task outTAD(type: Copy, dependsOn: "assembleDebug") {
     def outCatchDir = new File(OBA_Output)
     if (outCatchDir.exists()) {
         outCatchDir.deleteDir()
@@ -21,7 +21,7 @@ task outTAD(type: Copy, dependsOn: assembleDebug) {
     rename("${project.name}-debug.apk", Comm_Name + "-${android.defaultConfig.applicationId}-debug-${android.defaultConfig.versionName}-" + readTimeStr() + ".apk")
 }
 
-task outTAR(type: Copy, dependsOn: assembleRelease) {
+task outTAR(type: Copy, dependsOn: "assembleRelease") {
     def outCatchDir = new File(OBA_Output)
     if (outCatchDir.exists()) {
         outCatchDir.deleteDir()
@@ -34,7 +34,7 @@ task outTAR(type: Copy, dependsOn: assembleRelease) {
     rename("${project.name}-release-unsigned.apk", Comm_Name + "-${android.defaultConfig.applicationId}-release_unsigned-${android.defaultConfig.versionName}-" + readTimeStr() + ".apk")
 }
 
-task outTADARMv7a(type: Copy, dependsOn: assembleDebug) {
+task outTADARMv7a(type: Copy, dependsOn: "assembleDebug") {
     def outCatchDir = new File(OBA_Output)
     if (outCatchDir.exists()) {
         outCatchDir.deleteDir()
@@ -46,7 +46,7 @@ task outTADARMv7a(type: Copy, dependsOn: assembleDebug) {
     rename("${project.name}-armeabi-v7a-debug.apk", Comm_Name + "-${android.defaultConfig.applicationId}-armeabi-v7a-debug-${android.defaultConfig.versionName}-" + readTimeStr() + ".apk")
 }
 
-task outTARARMv7a(type: Copy, dependsOn: assembleRelease) {
+task outTARARMv7a(type: Copy, dependsOn: "assembleRelease") {
     def outCatchDir = new File(OBA_Output)
     if (outCatchDir.exists()) {
         outCatchDir.deleteDir()
@@ -67,7 +67,7 @@ task outTARARMv7a(type: Copy, dependsOn: assembleRelease) {
     rename("${project.name}-armeabi-v7a-release-unsigned.apk", Comm_Name + "-${android.defaultConfig.applicationId}-armeabi-v7a-release_unsigned-${android.defaultConfig.versionName}-" + readTimeStr() + ".apk")
 }
 
-task outProductFlavorsReleaseUnsigned(type: Copy, dependsOn: assembleRelease) {
+task outProductFlavorsReleaseUnsigned(type: Copy, dependsOn: "assembleRelease") {
     def outCatchDir = new File(OBA_Output)
     if (outCatchDir.exists()) {
         outCatchDir.deleteDir()
@@ -82,7 +82,7 @@ task outProductFlavorsReleaseUnsigned(type: Copy, dependsOn: assembleRelease) {
     }
 }
 
-task outProductFlavorsReleaseAll(type: Copy, dependsOn: assembleRelease) {
+task outProductFlavorsReleaseAll(type: Copy, dependsOn: "assembleRelease") {
     def outCatchDir = new File(OBA_Output)
     if (outCatchDir.exists()) {
         outCatchDir.deleteDir()
